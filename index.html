@@ -347,6 +347,199 @@
     line-height: 1.7;
   }
 
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 500;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    padding: 20px;
+  }
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .modal {
+    background: var(--black-card);
+    border: 1px solid rgba(201,168,76,0.2);
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    transform: translateY(24px);
+    transition: transform 0.4s ease;
+    position: relative;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+
+  .modal-gallery {
+    position: relative;
+    background: linear-gradient(135deg, #1a1200, #0d0d0d);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 420px;
+    overflow: hidden;
+  }
+  .modal-main-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+  }
+  .modal-main-img.fade { opacity: 0; }
+
+  .modal-arrow {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    cursor: none;
+    transition: all 0.3s;
+    z-index: 2;
+    user-select: none;
+  }
+  .modal-arrow:hover { background: var(--gold); color: var(--black); }
+  .modal-arrow.prev { left: 12px; }
+  .modal-arrow.next { right: 12px; }
+
+  .modal-counter {
+    position: absolute; bottom: 72px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold-dim);
+    background: rgba(0,0,0,0.5);
+    padding: 4px 12px;
+  }
+
+  .modal-thumbs {
+    position: absolute; bottom: 12px; left: 0; right: 0;
+    display: flex; justify-content: center; gap: 8px;
+    padding: 0 12px;
+  }
+  .modal-thumb {
+    width: 52px; height: 52px;
+    object-fit: cover;
+    border: 1px solid var(--gold-dim);
+    cursor: none;
+    opacity: 0.5;
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+  .modal-thumb.active, .modal-thumb:hover { opacity: 1; border-color: var(--gold); }
+
+  .modal-info {
+    padding: 48px 40px;
+    display: flex; flex-direction: column;
+    overflow-y: auto;
+  }
+  .modal-tag {
+    font-size: 9px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .modal-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(20px, 2.5vw, 30px);
+    font-weight: 400; color: var(--white);
+    letter-spacing: 2px; line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .modal-divider {
+    width: 40px; height: 1px;
+    background: var(--gold); opacity: 0.4;
+    margin-bottom: 24px;
+  }
+  .modal-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 16px;
+    color: var(--white-dim); line-height: 1.8;
+    margin-bottom: 32px; flex: 1;
+  }
+  .modal-wa {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 14px 32px; background: #25D366;
+    color: white; text-decoration: none;
+    font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; font-family: 'Raleway', sans-serif;
+    transition: all 0.3s; justify-content: center; margin-top: auto;
+  }
+  .modal-wa:hover { background: #1da851; }
+  .modal-wa svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
+
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold-dim);
+    background: transparent; color: var(--gold);
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: none; z-index: 10; transition: all 0.3s;
+  }
+  .modal-close:hover { background: var(--gold); color: var(--black); }
+
+  @media (max-width: 768px) {
+    .modal { grid-template-columns: 1fr; max-height: 95vh; overflow-y: auto; }
+    .modal-gallery { min-height: 280px; }
+    .modal-info { padding: 28px 24px; }
+  }
+
+  /* FILTER BUTTONS */
+  .catalog-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 40px auto 56px;
+    max-width: 800px;
+  }
+  .filter-btn {
+    padding: 10px 28px;
+    border: 1px solid var(--gold-dim);
+    background: transparent;
+    color: var(--white-dim);
+    font-family: 'Raleway', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .filter-btn::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: -1;
+  }
+  .filter-btn:hover {
+    color: var(--black);
+    border-color: var(--gold);
+  }
+  .filter-btn:hover::before { transform: translateX(0); }
+  .filter-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+  }
+
+  .product-card.hidden {
+    display: none;
+  }
+  .product-card.fade-in {
+    animation: fadeUp 0.4s ease forwards;
+  }
+
   .catalog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -373,6 +566,12 @@
     background: linear-gradient(135deg, #1a1200 0%, #0d0d0d 100%);
     font-size: 80px;
     transition: transform 0.5s ease;
+  }
+  .product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   .product-card:hover .product-img { transform: scale(1.08); }
 
@@ -686,55 +885,85 @@
     <p>Explora nuestra selección de calzado. Si algo te enamora, contáctanos y coordinamos tu pedido.</p>
   </div>
 
+  <!-- FILTROS -->
+  <div class="catalog-filters reveal">
+    <button class="filter-btn active" data-filter="todos">✦ Todos</button>
+    <button class="filter-btn" data-filter="tacon">Tacones</button>
+    <button class="filter-btn" data-filter="stiletto">Stilettos</button>
+    <button class="filter-btn" data-filter="flat">Flats</button>
+    <button class="filter-btn" data-filter="bota">Botas</button>
+    <button class="filter-btn" data-filter="sandalia">Sandalias</button>
+  </div>
+
   <div class="catalog-grid reveal">
-    <div class="product-card">
-      <div class="product-img">👡</div>
+    <div class="product-card" data-type="stiletto"
+      data-name="Stiletto Clásico"
+      data-tag="Nueva Llegada"
+      data-desc="Líneas puras y una silueta atemporal. Este stiletto eleva cualquier look con su corte preciso y tacón en aguja que alarga la figura con gracia natural."
+      data-images='["AQUI-VA-EL-LINK-DE-TU-IMAGEN","AQUI-VA-EL-LINK-ANGULO-2","AQUI-VA-EL-LINK-ANGULO-3"]'>
+      <div class="product-img"><img src="AQUI-VA-EL-LINK-DE-TU-IMAGEN" alt="Stiletto Clásico"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Nueva Llegada</div>
         <div class="product-name">Stiletto Clásico</div>
         <div class="product-price">Consultar precio</div>
-        <div class="product-action">Consultar</div>
+        <div class="product-action">Ver detalle</div>
       </div>
     </div>
-    <div class="product-card">
-      <div class="product-img">👠</div>
+    <div class="product-card" data-type="tacon"
+      data-name="Tacón Dorado"
+      data-tag="Favorito"
+      data-desc="El favorito de nuestra clientela. Un tacón robusto con acabado dorado que combina sofisticación y estabilidad para lucir perfecta todo el día."
+      data-images='["AQUI-VA-EL-LINK-DE-TU-IMAGEN","AQUI-VA-EL-LINK-ANGULO-2","AQUI-VA-EL-LINK-ANGULO-3"]'>
+      <div class="product-img"><img src="AQUI-VA-EL-LINK-DE-TU-IMAGEN" alt="Tacón Dorado"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Favorito</div>
         <div class="product-name">Tacón Dorado</div>
         <div class="product-price">Consultar precio</div>
-        <div class="product-action">Consultar</div>
+        <div class="product-action">Ver detalle</div>
       </div>
     </div>
-    <div class="product-card">
-      <div class="product-img">🥿</div>
+    <div class="product-card" data-type="flat"
+      data-name="Flat Elegante"
+      data-tag="Comodidad"
+      data-desc="Elegancia sin sacrificar el confort. Este flat de cuero suave abraza el pie con delicadeza y acompaña desde la mañana hasta la noche sin esfuerzo."
+      data-images='["AQUI-VA-EL-LINK-DE-TU-IMAGEN","AQUI-VA-EL-LINK-ANGULO-2","AQUI-VA-EL-LINK-ANGULO-3"]'>
+      <div class="product-img"><img src="AQUI-VA-EL-LINK-DE-TU-IMAGEN" alt="Flat Elegante"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Comodidad</div>
         <div class="product-name">Flat Elegante</div>
         <div class="product-price">Consultar precio</div>
-        <div class="product-action">Consultar</div>
+        <div class="product-action">Ver detalle</div>
       </div>
     </div>
-    <div class="product-card">
-      <div class="product-img">👢</div>
+    <div class="product-card" data-type="bota"
+      data-name="Bota Fina"
+      data-tag="Temporada"
+      data-desc="Diseñada para la mujer que impone presencia. Caña alta y punta fina que define el paso con autoridad y distinción en cada temporada."
+      data-images='["AQUI-VA-EL-LINK-DE-TU-IMAGEN","AQUI-VA-EL-LINK-ANGULO-2","AQUI-VA-EL-LINK-ANGULO-3"]'>
+      <div class="product-img"><img src="AQUI-VA-EL-LINK-DE-TU-IMAGEN" alt="Bota Fina"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Temporada</div>
         <div class="product-name">Bota Fina</div>
         <div class="product-price">Consultar precio</div>
-        <div class="product-action">Consultar</div>
+        <div class="product-action">Ver detalle</div>
       </div>
     </div>
-    <div class="product-card">
-      <div class="product-img">✨</div>
+    <div class="product-card" data-type="sandalia"
+      data-name="Sandalia Premium"
+      data-tag="Edición Especial"
+      data-desc="Una sandalia de edición limitada con detalles artesanales únicos. Su diseño abierto y acabados premium la convierten en la pieza estrella de cualquier ocasión especial."
+      data-images='["AQUI-VA-EL-LINK-DE-TU-IMAGEN","AQUI-VA-EL-LINK-ANGULO-2","AQUI-VA-EL-LINK-ANGULO-3"]'>
+      <div class="product-img"><img src="AQUI-VA-EL-LINK-DE-TU-IMAGEN" alt="Sandalia Premium"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Edición Especial</div>
         <div class="product-name">Sandalia Premium</div>
         <div class="product-price">Consultar precio</div>
-        <div class="product-action">Consultar</div>
+        <div class="product-action">Ver detalle</div>
       </div>
     </div>
     <div class="product-card" style="background: var(--black-card); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px;">
@@ -777,7 +1006,134 @@
   <div class="footer-copy">© 2026</div>
 </footer>
 
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+
+    <!-- Galería izquierda -->
+    <div class="modal-gallery">
+      <button class="modal-arrow prev" id="modalPrev">‹</button>
+      <img class="modal-main-img" id="modalMainImg" src="" alt="">
+      <button class="modal-arrow next" id="modalNext">›</button>
+      <div class="modal-counter" id="modalCounter">1 / 3</div>
+      <div class="modal-thumbs" id="modalThumbs"></div>
+    </div>
+
+    <!-- Info derecha -->
+    <div class="modal-info">
+      <div>
+        <div class="modal-tag" id="modalTag"></div>
+        <div class="modal-name" id="modalName"></div>
+        <div class="modal-divider"></div>
+        <p class="modal-desc" id="modalDesc"></p>
+      </div>
+      <a class="modal-wa" id="modalWa" href="#" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Consultar por WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
 <script>
+  // ── MODAL ──────────────────────────────────────────
+  const overlay    = document.getElementById('modalOverlay');
+  const modalClose = document.getElementById('modalClose');
+  const mainImg    = document.getElementById('modalMainImg');
+  const thumbsEl   = document.getElementById('modalThumbs');
+  const counter    = document.getElementById('modalCounter');
+  const modalTag   = document.getElementById('modalTag');
+  const modalName  = document.getElementById('modalName');
+  const modalDesc  = document.getElementById('modalDesc');
+  const modalWa    = document.getElementById('modalWa');
+  const prevBtn    = document.getElementById('modalPrev');
+  const nextBtn    = document.getElementById('modalNext');
+
+  let images = [], currentIdx = 0;
+
+  function showImage(idx) {
+    currentIdx = (idx + images.length) % images.length;
+    mainImg.classList.add('fade');
+    setTimeout(() => {
+      mainImg.src = images[currentIdx];
+      mainImg.classList.remove('fade');
+    }, 150);
+    counter.textContent = `${currentIdx + 1} / ${images.length}`;
+    thumbsEl.querySelectorAll('.modal-thumb').forEach((t, i) => {
+      t.classList.toggle('active', i === currentIdx);
+    });
+  }
+
+  function openModal(card) {
+    images = JSON.parse(card.dataset.images);
+    modalTag.textContent  = card.dataset.tag;
+    modalName.textContent = card.dataset.name;
+    modalDesc.textContent = card.dataset.desc;
+    const msg = encodeURIComponent(`Hola, me interesa el modelo *${card.dataset.name}* de Passato Eleganti`);
+    modalWa.href = `https://wa.me/593979600478?text=${msg}`;
+
+    // Miniaturas
+    thumbsEl.innerHTML = '';
+    images.forEach((src, i) => {
+      const t = document.createElement('img');
+      t.src = src; t.alt = `Ángulo ${i+1}`;
+      t.className = 'modal-thumb' + (i === 0 ? ' active' : '');
+      t.addEventListener('click', () => showImage(i));
+      thumbsEl.appendChild(t);
+    });
+
+    showImage(0);
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Abrir al pulsar una tarjeta
+  document.querySelectorAll('.product-card[data-images]').forEach(card => {
+    card.addEventListener('click', () => openModal(card));
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  prevBtn.addEventListener('click', e => { e.stopPropagation(); showImage(currentIdx - 1); });
+  nextBtn.addEventListener('click', e => { e.stopPropagation(); showImage(currentIdx + 1); });
+
+  // Teclado
+  document.addEventListener('keydown', e => {
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft') showImage(currentIdx - 1);
+    if (e.key === 'ArrowRight') showImage(currentIdx + 1);
+  });
+
+  // ── FILTER BUTTONS ─────────────────────────────────
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const productCards = document.querySelectorAll('.product-card[data-type]');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+
+      productCards.forEach(card => {
+        if (filter === 'todos' || card.dataset.type === filter) {
+          card.classList.remove('hidden');
+          card.classList.add('fade-in');
+          setTimeout(() => card.classList.remove('fade-in'), 400);
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
   // Custom cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
