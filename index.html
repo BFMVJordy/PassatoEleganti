@@ -394,7 +394,8 @@
     opacity: 0;
     pointer-events: none;
   }
-  .modal-gallery:hover .modal-arrow {
+  .modal-gallery:hover .modal-arrow,
+  .modal-gallery.touch-active .modal-arrow {
     opacity: 1;
     pointer-events: all;
   }
@@ -419,7 +420,8 @@
     transition: opacity 0.3s ease;
     pointer-events: none;
   }
-  .modal-gallery:hover .modal-thumbs {
+  .modal-gallery:hover .modal-thumbs,
+  .modal-gallery.touch-active .modal-thumbs {
     opacity: 1;
     pointer-events: all;
   }
@@ -500,17 +502,7 @@
       padding: 0;
       display: block;
     }
-    /* En móvil: flechas siempre visibles (no hay hover) */
-    .modal-arrow {
-      opacity: 1 !important;
-      pointer-events: all !important;
-    }
     .modal-info { padding: 28px 24px; }
-    /* En móvil: miniaturas siempre visibles */
-    .modal-thumbs {
-      opacity: 1 !important;
-      pointer-events: all !important;
-    }
   }
 
   /* ── FILTROS ── */
@@ -1100,6 +1092,20 @@ Calzado de cuero café con acabado elástico que combina sofisticación y estabi
     });
   }, { threshold: 0.1 });
   reveals.forEach(r => observer.observe(r));
+
+  // En móvil: mostrar controles al tocar la galería, ocultar después de 2.5s
+  const gallery = document.querySelector('.modal-gallery');
+  let hideTimer = null;
+
+  function showControls() {
+    gallery.classList.add('touch-active');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => {
+      gallery.classList.remove('touch-active');
+    }, 2500);
+  }
+
+  gallery.addEventListener('touchstart', showControls, { passive: true });
 </script>
 </body>
 </html>
