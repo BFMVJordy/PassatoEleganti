@@ -324,6 +324,7 @@
     line-height: 1.7;
   }
 
+  /* ── MODAL ── */
   .modal-overlay {
     position: fixed; inset: 0;
     background: rgba(0,0,0,0.92);
@@ -335,6 +336,7 @@
     padding: 20px;
   }
   .modal-overlay.open { opacity: 1; pointer-events: all; }
+
   .modal {
     background: var(--black-card);
     border: 1px solid rgba(201,168,76,0.2);
@@ -350,25 +352,32 @@
     align-items: stretch;
   }
   .modal-overlay.open .modal { transform: translateY(0); }
+
+  /* Galería — escritorio */
   .modal-gallery {
     position: relative;
-    background: linear-gradient(135deg, #1a1200, #0d0d0d);
-    display: flex; flex-direction: column;
+    background: #0d0d0d;
+    display: flex;
+    flex-direction: column;
     align-items: stretch;
     height: 500px;
     max-height: 70vh;
     overflow: hidden;
     flex-shrink: 0;
   }
+
+  /* Imagen principal — llena todo el cuadro */
   .modal-main-img {
     width: 100%;
-    height: calc(100% - 70px);
+    height: 100%;
     object-fit: cover;
     object-position: center;
     transition: opacity 0.3s ease;
     display: block;
   }
   .modal-main-img.fade { opacity: 0; }
+
+  /* Flechas: ocultas por defecto, visibles al hacer hover en la galería */
   .modal-arrow {
     position: absolute;
     top: 50%; transform: translateY(-50%);
@@ -392,6 +401,7 @@
   .modal-arrow:hover { background: var(--gold); color: var(--black); }
   .modal-arrow.prev { left: 12px; }
   .modal-arrow.next { right: 12px; }
+
   .modal-counter {
     position: absolute; bottom: 72px; left: 50%;
     transform: translateX(-50%);
@@ -405,6 +415,13 @@
     position: absolute; bottom: 12px; left: 0; right: 0;
     display: flex; justify-content: center; gap: 8px;
     padding: 0 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .modal-gallery:hover .modal-thumbs {
+    opacity: 1;
+    pointer-events: all;
   }
   .modal-thumb {
     width: 52px; height: 52px;
@@ -416,6 +433,7 @@
     flex-shrink: 0;
   }
   .modal-thumb.active, .modal-thumb:hover { opacity: 1; border-color: var(--gold); }
+
   .modal-info {
     padding: 48px 40px;
     display: flex; flex-direction: column;
@@ -435,6 +453,7 @@
     font-style: italic; font-size: 16px;
     color: var(--white-dim); line-height: 1.8;
     margin-bottom: 32px; flex: 1;
+    white-space: pre-line;
   }
   .modal-wa {
     display: inline-flex; align-items: center; gap: 12px;
@@ -446,6 +465,7 @@
   }
   .modal-wa:hover { background: #1da851; }
   .modal-wa svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
+
   .modal-close {
     position: absolute; top: 16px; right: 16px;
     width: 36px; height: 36px;
@@ -456,12 +476,44 @@
     cursor: none; z-index: 10; transition: all 0.3s;
   }
   .modal-close:hover { background: var(--gold); color: var(--black); }
+
+  /* ── MODAL MÓVIL ── */
   @media (max-width: 768px) {
-    .modal { grid-template-columns: 1fr; max-height: 95vh; overflow-y: auto; }
-    .modal-gallery { height: 280px; max-height: 280px; }
+    .modal {
+      grid-template-columns: 1fr;
+      max-height: 95vh;
+      overflow-y: auto;
+    }
+    .modal-gallery {
+      height: 400px;
+      max-height: 400px;
+      flex-shrink: 0;
+      width: 100%;
+    }
+    /* En móvil: cover igual que PC, llena todo */
+    .modal-main-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      background: #0d0d0d;
+      padding: 0;
+      display: block;
+    }
+    /* En móvil: flechas siempre visibles (no hay hover) */
+    .modal-arrow {
+      opacity: 1 !important;
+      pointer-events: all !important;
+    }
     .modal-info { padding: 28px 24px; }
+    /* En móvil: miniaturas siempre visibles */
+    .modal-thumbs {
+      opacity: 1 !important;
+      pointer-events: all !important;
+    }
   }
 
+  /* ── FILTROS ── */
   .catalog-filters {
     display: flex;
     flex-wrap: wrap;
@@ -495,6 +547,7 @@
   .filter-btn:hover { color: var(--black); border-color: var(--gold); }
   .filter-btn:hover::before { transform: translateX(0); }
   .filter-btn.active { background: var(--gold); border-color: var(--gold); color: var(--black); }
+
   .product-card.hidden { display: none; }
   .product-card.fade-in { animation: fadeUp 0.4s ease forwards; }
 
@@ -703,24 +756,6 @@
   </div>
 </div>
 
-<!-- ============================================================
-     CATÁLOGO
-     ============================================================
-     INSTRUCCIONES PARA AGREGAR IMÁGENES:
-     
-     Cada producto tiene DOS partes que debes editar:
-     
-     1) data-images='["FOTO_PRINCIPAL","FOTO_ANGULO_2","FOTO_ANGULO_3"]'
-        → Pon aquí los 3 links de fotos del mismo zapato
-     
-     2) <img src="FOTO_PRINCIPAL" ...>
-        → Pon aquí el mismo link que el primero de data-images
-     
-     Puedes tener MÁS o MENOS de 3 fotos, por ejemplo:
-       data-images='["foto1","foto2"]'          → 2 fotos
-       data-images='["foto1","foto2","foto3","foto4"]'  → 4 fotos
-     ============================================================ -->
-
 <section id="coleccion" class="catalog-section">
   <div class="catalog-header reveal">
     <div class="section-label" style="justify-content: center;">Colección</div>
@@ -738,23 +773,14 @@
 
   <div class="catalog-grid reveal">
 
-    <!-- ══════════════════════════════════════════
-         PRODUCTO 1 – STILETTO CLÁSICO
-         ══════════════════════════════════════════ -->
     <div class="product-card" data-type="Mocasíns"
-      data-name="Mocasín Elegente"
+      data-name="Mocasín Elegante"
       data-tag="Nueva Llegada"
       data-desc="Mocasín Elegante
-Cuero negro · Cuña baja · Hebilla platiada
+Cuero negro · Cuña baja · Hebilla plateada
 Comodidad y estilo para cada día."
-      data-images='[
-        "https://i.postimg.cc/j2sJPxjf/modelo1.png",
-        "https://i.postimg.cc/dVzknm06/IMG-20260507-141527-removebg-preview.png",
-        "https://i.postimg.cc/GmZ8zJpX/IMG-20260507-141532-removebg-preview.png",
-        "https://i.postimg.cc/Sxw2V7KD/IMG-20260507-141542-removebg-preview.png"
-      ]'>
-      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
-      <div class="product-img"><img src="https://i.postimg.cc/j2sJPxjf/modelo1.png" alt="Mocasín Clásico"></div>
+      data-images='["https://i.postimg.cc/j2sJPxjf/modelo1.png","https://i.postimg.cc/dVzknm06/IMG-20260507-141527-removebg-preview.png","https://i.postimg.cc/GmZ8zJpX/IMG-20260507-141532-removebg-preview.png","https://i.postimg.cc/Sxw2V7KD/IMG-20260507-141542-removebg-preview.png"]'>
+      <div class="product-img"><img src="https://i.postimg.cc/j2sJPxjf/modelo1.png" alt="Mocasín Elegante"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Nueva Llegada</div>
@@ -763,21 +789,15 @@ Comodidad y estilo para cada día."
         <div class="product-action">Ver detalle</div>
       </div>
     </div>
-    
-        <div class="product-card" data-type="Mocasíns"
+
+    <div class="product-card" data-type="Mocasíns"
       data-name="Mocasín Flor"
       data-tag="Nueva Llegada"
       data-desc="Mocasín Flor
-Cuero miel · Cuña baja · picado en flor
+Cuero miel · Cuña baja · Picado en flor
 Comodidad y estilo para cada día."
-      data-images='[
-        "https://i.postimg.cc/4dw0R1mf/Gemini-Generated-Image-4xkd4s4xkd4s4xkd.png",
-        "https://i.postimg.cc/yxdb1SZD/IMG-20260507-141011-removebg-preview.png",
-        "https://i.postimg.cc/hvj5D7dJ/IMG-20260507-141006-removebg-preview.png",
-        "https://i.postimg.cc/1XtjmNqn/IMG-20260507-141002-removebg-preview.png"
-      ]'>
-      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
-      <div class="product-img"><img src="https://i.postimg.cc/4dw0R1mf/Gemini-Generated-Image-4xkd4s4xkd4s4xkd.png" alt="Mocasín Clásico"></div>
+      data-images='["https://i.postimg.cc/4dw0R1mf/Gemini-Generated-Image-4xkd4s4xkd4s4xkd.png","https://i.postimg.cc/yxdb1SZD/IMG-20260507-141011-removebg-preview.png","https://i.postimg.cc/hvj5D7dJ/IMG-20260507-141006-removebg-preview.png","https://i.postimg.cc/1XtjmNqn/IMG-20260507-141002-removebg-preview.png"]'>
+      <div class="product-img"><img src="https://i.postimg.cc/4dw0R1mf/Gemini-Generated-Image-4xkd4s4xkd4s4xkd.png" alt="Mocasín Flor"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Nueva Llegada</div>
@@ -787,19 +807,13 @@ Comodidad y estilo para cada día."
       </div>
     </div>
 
-            <div class="product-card" data-type="Mocasíns"
+    <div class="product-card" data-type="Mocasíns"
       data-name="Mocasín Clásico"
       data-tag="Nueva Llegada"
       data-desc="Mocasín Clásico
-Cuero negro · Cuña baja · adorno de laso
+Cuero negro · Cuña baja · Adorno de lazo
 Comodidad y estilo para cada día."
-      data-images='[
-        "https://i.postimg.cc/xdZRvFJH/Gemini-Generated-Image-i7pvxdi7pvxdi7pv.png",
-        "https://i.postimg.cc/yNGPmrgJ/IMG-20260507-143031-removebg-preview.png",
-        "https://i.postimg.cc/mrnwY6z1/IMG-20260507-143036-removebg-preview.png",
-        "https://i.postimg.cc/25twQXbb/IMG-20260507-143042-removebg-preview.png"
-      ]'>
-      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
+      data-images='["https://i.postimg.cc/xdZRvFJH/Gemini-Generated-Image-i7pvxdi7pvxdi7pv.png","https://i.postimg.cc/yNGPmrgJ/IMG-20260507-143031-removebg-preview.png","https://i.postimg.cc/mrnwY6z1/IMG-20260507-143036-removebg-preview.png","https://i.postimg.cc/25twQXbb/IMG-20260507-143042-removebg-preview.png"]'>
       <div class="product-img"><img src="https://i.postimg.cc/xdZRvFJH/Gemini-Generated-Image-i7pvxdi7pvxdi7pv.png" alt="Mocasín Clásico"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
@@ -810,166 +824,111 @@ Comodidad y estilo para cada día."
       </div>
     </div>
 
-                <div class="product-card" data-type="Mocasíns"
-      data-name="Mocasín Clásico"
+    <div class="product-card" data-type="Mocasíns"
+      data-name="Mocasín Conchevino"
       data-tag="Nueva Llegada"
       data-desc="Mocasín Clásico
-Cuero Conchevino · Cuña baja · adorno de laso
+Cuero Conchevino · Cuña baja · Adorno de lazo
 Comodidad y estilo para cada día."
-      data-images='[
-        "https://i.postimg.cc/d0G16hDX/Gemini-Generated-Image-ifp3dhifp3dhifp3.png",
-        "https://i.postimg.cc/NMY0zQrP/IMG-20260507-142706-removebg-preview.png",
-        "https://i.postimg.cc/Dz1Z6SmN/IMG-20260507-142710-removebg-preview.png",
-        "https://i.postimg.cc/YSQ9Rvjy/IMG-20260507-142729-removebg-preview.png"
-      ]'>
-      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
-      <div class="product-img"><img src="https://i.postimg.cc/d0G16hDX/Gemini-Generated-Image-ifp3dhifp3dhifp3.png" alt="Mocasín Clásico"></div>
+      data-images='["https://i.postimg.cc/d0G16hDX/Gemini-Generated-Image-ifp3dhifp3dhifp3.png","https://i.postimg.cc/NMY0zQrP/IMG-20260507-142706-removebg-preview.png","https://i.postimg.cc/Dz1Z6SmN/IMG-20260507-142710-removebg-preview.png","https://i.postimg.cc/YSQ9Rvjy/IMG-20260507-142729-removebg-preview.png"]'>
+      <div class="product-img"><img src="https://i.postimg.cc/d0G16hDX/Gemini-Generated-Image-ifp3dhifp3dhifp3.png" alt="Mocasín Conchevino"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Nueva Llegada</div>
-        <div class="product-name">Mocasín Clásico</div>
+        <div class="product-name">Mocasín Conchevino</div>
         <div class="product-price">Consultar precio</div>
         <div class="product-action">Ver detalle</div>
       </div>
     </div>
 
-                    <div class="product-card" data-type="Mocasíns"
+    <div class="product-card" data-type="Mocasíns"
       data-name="Mocasín Formal"
       data-tag="Nueva Llegada"
       data-desc="Mocasín Formal
-
 Cuero negro · Cuña baja · Casual
 Comodidad y estilo para cada día."
-      data-images='[
-        "https://i.postimg.cc/7PzkTFG9/Gemini-Generated-Image-cybydpcybydpcyby.png",
-        "https://i.postimg.cc/J7XLBfDN/IMG-20260507-143238-removebg-preview.png",
-        "https://i.postimg.cc/NGXcr391/IMG-20260507-143242-removebg-preview.png",
-        "https://i.postimg.cc/y6RHSMg0/IMG-20260507-143246-removebg-preview.png"
-      ]'>
-      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
-      <div class="product-img"><img src="https://i.postimg.cc/7PzkTFG9/Gemini-Generated-Image-cybydpcybydpcyby.png" alt="Mocasín Formal
-        "></div>
+      data-images='["https://i.postimg.cc/7PzkTFG9/Gemini-Generated-Image-cybydpcybydpcyby.png","https://i.postimg.cc/J7XLBfDN/IMG-20260507-143238-removebg-preview.png","https://i.postimg.cc/NGXcr391/IMG-20260507-143242-removebg-preview.png","https://i.postimg.cc/y6RHSMg0/IMG-20260507-143246-removebg-preview.png"]'>
+      <div class="product-img"><img src="https://i.postimg.cc/7PzkTFG9/Gemini-Generated-Image-cybydpcybydpcyby.png" alt="Mocasín Formal"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Nueva Llegada</div>
-        <div class="product-name">Mocasín Formal
-
-        </div>
+        <div class="product-name">Mocasín Formal</div>
         <div class="product-price">Consultar precio</div>
         <div class="product-action">Ver detalle</div>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════
-         PRODUCTO 2 – TACÓN DORADO
-         ══════════════════════════════════════════ -->
     <div class="product-card" data-type="Oxford"
-      data-name="Oxford Cafe"
+      data-name="Oxford Café"
       data-tag="Oxford"
-      data-desc="El Oxford Un calzado de cuero cafe con acabado elastico que combina sofisticación y estabilidad para lucir perfecta todo el día."
-      data-images='[
-        "https://i.postimg.cc/0ysDs1D1/Gemini-Generated-Image-dyulo3dyulo3dyul.png",
-        "https://i.postimg.cc/YCHYHBgZ/IMG-20260507-143511-removebg-preview.png",
-        "https://i.postimg.cc/cLSwSGYj/IMG-20260507-143516-removebg-preview.png",
-        "https://i.postimg.cc/rwkxk2W7/IMG-20260507-143520-removebg-preview.png"
-      ]'>
-      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
-      <div class="product-img"><img src="https://i.postimg.cc/0ysDs1D1/Gemini-Generated-Image-dyulo3dyulo3dyul.png" alt="Tacón Dorado"></div>
+      data-desc="El Oxford
+Calzado de cuero café con acabado elástico que combina sofisticación y estabilidad para lucir perfecta todo el día."
+      data-images='["https://i.postimg.cc/0ysDs1D1/Gemini-Generated-Image-dyulo3dyulo3dyul.png","https://i.postimg.cc/YCHYHBgZ/IMG-20260507-143511-removebg-preview.png","https://i.postimg.cc/cLSwSGYj/IMG-20260507-143516-removebg-preview.png","https://i.postimg.cc/rwkxk2W7/IMG-20260507-143520-removebg-preview.png"]'>
+      <div class="product-img"><img src="https://i.postimg.cc/0ysDs1D1/Gemini-Generated-Image-dyulo3dyulo3dyul.png" alt="Oxford Café"></div>
       <div class="product-overlay"></div>
-      <div cl
-      roduct-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Nueva Llegada</div>
-        <div class="product-name">Oxford Cafe</div>
+        <div class="product-name">Oxford Café</div>
         <div class="product-price">Consultar precio</div>
         <div class="product-action">Ver detalle</div>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════
-         PRODUCTO 4 – BOTA FINA
-         ══════════════════════════════════════════ -->
     <div class="product-card" data-type="botines"
-      data-name="PROXIMAMENTE "
-      data-tag="Temporada"
+      data-name="Botines"
+      data-tag="Próximamente"
       data-desc="Diseñada para la mujer que impone presencia. Caña alta y punta fina que define el paso con autoridad y distinción en cada temporada."
-      data-images='[
-        "https://TU-LINK-BOTA-FOTO-1-AQUI",
-        "https://TU-LINK-BOTA-FOTO-2-AQUI",
-        "https://TU-LINK-BOTA-FOTO-3-AQUI"
-      ]'>
-      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
+      data-images='["https://TU-LINK-BOTA-FOTO-1-AQUI","https://TU-LINK-BOTA-FOTO-2-AQUI","https://TU-LINK-BOTA-FOTO-3-AQUI"]'>
       <div class="product-img"><img src="https://TU-LINK-BOTA-FOTO-1-AQUI" alt="Botines"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
-        <div class="product-tag">PROXIMAMENTE</div>
+        <div class="product-tag">Próximamente</div>
         <div class="product-name">Botines</div>
         <div class="product-price">Consultar precio</div>
         <div class="product-action">Ver detalle</div>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════
-         PRODUCTO 5 – SANDALIA PREMIUM
-         ══════════════════════════════════════════ -->
     <div class="product-card" data-type="sandalia"
-      data-name="Sandalia"
+      data-name="Sandalia Negra"
       data-tag="Edición Especial"
-      data-desc="Una sandalia de edición limitada de cuero negro con detalles artesanales únicos. Su diseño abierto y acabados premium la convierten en la pieza estrella de cualquier ocasión especial."
-      data-images='[
-        "https://i.postimg.cc/Zq6QqSDp/zandalia-A1.png",
-        "https://i.postimg.cc/HLbNLgPJ/zandalia2.png",
-        "https://i.postimg.cc/0N74NsHr/zandalia3.png",
-        "https://i.postimg.cc/g0370WBn/zandalia4.png"
-      ]'>
-      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
-      <div class="product-img"><img src="https://i.postimg.cc/Zq6QqSDp/zandalia-A1.png" alt="Sandalia Premium"></div>
+      data-desc="Sandalia de edición limitada de cuero negro con detalles artesanales únicos. Su diseño abierto y acabados premium la convierten en la pieza estrella de cualquier ocasión especial."
+      data-images='["https://i.postimg.cc/Zq6QqSDp/zandalia-A1.png","https://i.postimg.cc/HLbNLgPJ/zandalia2.png","https://i.postimg.cc/0N74NsHr/zandalia3.png","https://i.postimg.cc/g0370WBn/zandalia4.png"]'>
+      <div class="product-img"><img src="https://i.postimg.cc/Zq6QqSDp/zandalia-A1.png" alt="Sandalia Negra"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Edición Especial</div>
-        <div class="product-name">Sandalia</div>
+        <div class="product-name">Sandalia Negra</div>
         <div class="product-price">Consultar precio</div>
         <div class="product-action">Ver detalle</div>
       </div>
     </div>
 
     <div class="product-card" data-type="sandalia"
-      data-name="Sandalia"
+      data-name="Sandalia Café"
       data-tag="Edición Especial"
-      data-desc="Una sandalia de edición limitada de curero cafe  con detalles artesanales únicos. Su diseño abierto y acabados premium la convierten en la pieza estrella de cualquier ocasión especial."
-      data-images='[
-        "https://i.postimg.cc/sfb051dZ/Gemini-Generated-Image-gc1xigc1xigc1xig.png",
-        "https://i.postimg.cc/3rzb2W5y/IMG-20260507-142448-removebg-preview.png",
-        "https://i.postimg.cc/59Dk8jdX/IMG-20260507-142453-removebg-preview.png",
-        "https://i.postimg.cc/59Dk8jd6/IMG-20260507-142457-removebg-preview.png"
-      ]'>
-      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
-      <div class="product-img"><img src="https://i.postimg.cc/sfb051dZ/Gemini-Generated-Image-gc1xigc1xigc1xig.png" alt="Sandalia Premium"></div>
+      data-desc="Sandalia de edición limitada de cuero café con detalles artesanales únicos. Su diseño abierto y acabados premium la convierten en la pieza estrella de cualquier ocasión especial."
+      data-images='["https://i.postimg.cc/sfb051dZ/Gemini-Generated-Image-gc1xigc1xigc1xig.png","https://i.postimg.cc/3rzb2W5y/IMG-20260507-142448-removebg-preview.png","https://i.postimg.cc/59Dk8jdX/IMG-20260507-142453-removebg-preview.png","https://i.postimg.cc/59Dk8jd6/IMG-20260507-142457-removebg-preview.png"]'>
+      <div class="product-img"><img src="https://i.postimg.cc/sfb051dZ/Gemini-Generated-Image-gc1xigc1xigc1xig.png" alt="Sandalia Café"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Edición Especial</div>
-        <div class="product-name">Sandalia</div>
+        <div class="product-name">Sandalia Café</div>
         <div class="product-price">Consultar precio</div>
         <div class="product-action">Ver detalle</div>
       </div>
     </div>
 
-        <div class="product-card" data-type="sandalia"
-      data-name="Sandalia"
+    <div class="product-card" data-type="sandalia"
+      data-name="Sandalia Conchevino"
       data-tag="Edición Especial"
-      data-desc="Una sandalia de edición limitada de cuero Conchevino detalles artesanales únicos. Su diseño abierto y acabados premium la convierten en la pieza estrella de cualquier ocasión especial."
-      data-images='[
-        "https://i.postimg.cc/dVsRCK1v/Gemini-Generated-Image-pkzqh8pkzqh8pkzq.png",
-        "https://i.postimg.cc/L6BBhsHX/IMG-20260507-194450-removebg-preview.png",
-        "https://i.postimg.cc/L6BBhsHX/IMG-20260507-194450-removebg-preview.png",
-        "https://i.postimg.cc/15cc4z9z/IMG-20260507-194459-removebg-preview.png"
-      ]'>
-      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
-      <div class="product-img"><img src="https://i.postimg.cc/dVsRCK1v/Gemini-Generated-Image-pkzqh8pkzqh8pkzq.png" alt="Sandalia Premium"></div>
+      data-desc="Sandalia de edición limitada de cuero Conchevino con detalles artesanales únicos. Su diseño abierto y acabados premium la convierten en la pieza estrella de cualquier ocasión especial."
+      data-images='["https://i.postimg.cc/dVsRCK1v/Gemini-Generated-Image-pkzqh8pkzqh8pkzq.png","https://i.postimg.cc/L6BBhsHX/IMG-20260507-194450-removebg-preview.png","https://i.postimg.cc/L6BBhsHX/IMG-20260507-194450-removebg-preview.png","https://i.postimg.cc/15cc4z9z/IMG-20260507-194459-removebg-preview.png"]'>
+      <div class="product-img"><img src="https://i.postimg.cc/dVsRCK1v/Gemini-Generated-Image-pkzqh8pkzqh8pkzq.png" alt="Sandalia Conchevino"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Edición Especial</div>
-        <div class="product-name">Sandalia</div>
+        <div class="product-name">Sandalia Conchevino</div>
         <div class="product-price">Consultar precio</div>
         <div class="product-action">Ver detalle</div>
       </div>
