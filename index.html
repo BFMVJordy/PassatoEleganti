@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Passato Eleganti – Calzado de Dama</title>
+<link rel="icon" type="image/png" href="pas.ico">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -18,9 +19,7 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--black);
     color: var(--white);
@@ -30,7 +29,6 @@
     cursor: none;
   }
 
-  /* Custom cursor */
   .cursor {
     width: 10px; height: 10px;
     background: var(--gold);
@@ -53,7 +51,6 @@
     opacity: 0.5;
   }
 
-  /* NOISE OVERLAY */
   body::before {
     content: '';
     position: fixed; inset: 0;
@@ -63,7 +60,6 @@
     opacity: 0.3;
   }
 
-  /* NAV */
   nav {
     position: fixed; top: 0; width: 100%; z-index: 100;
     padding: 24px 48px;
@@ -88,7 +84,6 @@
   }
   .nav-links a:hover { color: var(--gold); }
 
-  /* HERO */
   .hero {
     min-height: 100vh;
     display: flex; flex-direction: column;
@@ -98,13 +93,10 @@
     overflow: hidden;
     padding: 120px 24px 80px;
   }
-
   .hero-bg {
     position: absolute; inset: 0;
     background: radial-gradient(ellipse at 50% 40%, #1a1200 0%, #0a0a0a 70%);
   }
-
-  /* Decorative rings background */
   .hero-rings {
     position: absolute;
     width: 600px; height: 600px;
@@ -119,12 +111,10 @@
     animation: rotateSlow 40s linear infinite;
     transform-origin: center;
   }
-
   @keyframes rotateSlow {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
-
   .hero-ornament {
     color: var(--gold);
     font-size: 13px;
@@ -142,7 +132,6 @@
     background: var(--gold);
     opacity: 0.6;
   }
-
   .hero-logo-symbol {
     width: 120px; height: 120px;
     margin: 0 auto 32px;
@@ -150,10 +139,7 @@
     animation: fadeUp 1s ease 0.5s forwards;
     position: relative;
   }
-  .hero-logo-symbol svg {
-    width: 100%; height: 100%;
-  }
-
+  .hero-logo-symbol svg { width: 100%; height: 100%; }
   h1 {
     font-family: 'Cinzel', serif;
     font-size: clamp(42px, 8vw, 90px);
@@ -175,7 +161,6 @@
     color: var(--white-dim);
     margin-top: 8px;
   }
-
   .hero-tagline {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
@@ -187,7 +172,6 @@
     animation: fadeUp 1s ease 1s forwards;
     position: relative;
   }
-
   .hero-cta {
     margin-top: 52px;
     opacity: 0;
@@ -218,7 +202,6 @@
   }
   .btn-gold:hover { color: var(--black); }
   .btn-gold:hover::before { transform: translateX(0); }
-
   .scroll-indicator {
     position: absolute; bottom: 40px; left: 50%;
     transform: translateX(-50%);
@@ -237,15 +220,12 @@
     51% { transform: scaleY(1); transform-origin: bottom; }
     100% { transform: scaleY(0); transform-origin: bottom; }
   }
-
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* SECTION BASE */
   section { padding: 100px 48px; }
-
   .section-label {
     font-size: 10px;
     letter-spacing: 6px;
@@ -261,7 +241,6 @@
     background: var(--gold);
     opacity: 0.4;
   }
-
   .section-title {
     font-family: 'Cinzel', serif;
     font-size: clamp(28px, 4vw, 48px);
@@ -276,7 +255,6 @@
     font-family: 'Cormorant Garamond', serif;
   }
 
-  /* ABOUT */
   .about {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -323,7 +301,6 @@
     padding: 0 24px;
   }
 
-  /* CATALOG */
   .catalog-section {
     background: var(--black-soft);
     position: relative;
@@ -347,7 +324,6 @@
     line-height: 1.7;
   }
 
-  /* MODAL */
   .modal-overlay {
     position: fixed; inset: 0;
     background: rgba(0,0,0,0.92);
@@ -358,10 +334,7 @@
     transition: opacity 0.4s ease;
     padding: 20px;
   }
-  .modal-overlay.open {
-    opacity: 1;
-    pointer-events: all;
-  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
   .modal {
     background: var(--black-card);
     border: 1px solid rgba(201,168,76,0.2);
@@ -374,23 +347,28 @@
     transform: translateY(24px);
     transition: transform 0.4s ease;
     position: relative;
+    align-items: stretch;
   }
   .modal-overlay.open .modal { transform: translateY(0); }
-
   .modal-gallery {
     position: relative;
     background: linear-gradient(135deg, #1a1200, #0d0d0d);
-    display: flex; align-items: center; justify-content: center;
-    min-height: 420px;
+    display: flex; flex-direction: column;
+    align-items: stretch;
+    height: 500px;
+    max-height: 70vh;
     overflow: hidden;
+    flex-shrink: 0;
   }
   .modal-main-img {
-    width: 100%; height: 100%;
+    width: 100%;
+    height: calc(100% - 70px);
     object-fit: cover;
+    object-position: center;
     transition: opacity 0.3s ease;
+    display: block;
   }
   .modal-main-img.fade { opacity: 0; }
-
   .modal-arrow {
     position: absolute;
     top: 50%; transform: translateY(-50%);
@@ -404,11 +382,16 @@
     transition: all 0.3s;
     z-index: 2;
     user-select: none;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .modal-gallery:hover .modal-arrow {
+    opacity: 1;
+    pointer-events: all;
   }
   .modal-arrow:hover { background: var(--gold); color: var(--black); }
   .modal-arrow.prev { left: 12px; }
   .modal-arrow.next { right: 12px; }
-
   .modal-counter {
     position: absolute; bottom: 72px; left: 50%;
     transform: translateX(-50%);
@@ -418,7 +401,6 @@
     background: rgba(0,0,0,0.5);
     padding: 4px 12px;
   }
-
   .modal-thumbs {
     position: absolute; bottom: 12px; left: 0; right: 0;
     display: flex; justify-content: center; gap: 8px;
@@ -434,17 +416,12 @@
     flex-shrink: 0;
   }
   .modal-thumb.active, .modal-thumb:hover { opacity: 1; border-color: var(--gold); }
-
   .modal-info {
     padding: 48px 40px;
     display: flex; flex-direction: column;
     overflow-y: auto;
   }
-  .modal-tag {
-    font-size: 9px; letter-spacing: 4px;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 12px;
-  }
+  .modal-tag { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
   .modal-name {
     font-family: 'Cinzel', serif;
     font-size: clamp(20px, 2.5vw, 30px);
@@ -452,11 +429,7 @@
     letter-spacing: 2px; line-height: 1.2;
     margin-bottom: 16px;
   }
-  .modal-divider {
-    width: 40px; height: 1px;
-    background: var(--gold); opacity: 0.4;
-    margin-bottom: 24px;
-  }
+  .modal-divider { width: 40px; height: 1px; background: var(--gold); opacity: 0.4; margin-bottom: 24px; }
   .modal-desc {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic; font-size: 16px;
@@ -473,7 +446,6 @@
   }
   .modal-wa:hover { background: #1da851; }
   .modal-wa svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
-
   .modal-close {
     position: absolute; top: 16px; right: 16px;
     width: 36px; height: 36px;
@@ -484,14 +456,12 @@
     cursor: none; z-index: 10; transition: all 0.3s;
   }
   .modal-close:hover { background: var(--gold); color: var(--black); }
-
   @media (max-width: 768px) {
     .modal { grid-template-columns: 1fr; max-height: 95vh; overflow-y: auto; }
-    .modal-gallery { min-height: 280px; }
+    .modal-gallery { height: 280px; max-height: 280px; }
     .modal-info { padding: 28px 24px; }
   }
 
-  /* FILTER BUTTONS */
   .catalog-filters {
     display: flex;
     flex-wrap: wrap;
@@ -522,23 +492,11 @@
     transition: transform 0.3s ease;
     z-index: -1;
   }
-  .filter-btn:hover {
-    color: var(--black);
-    border-color: var(--gold);
-  }
+  .filter-btn:hover { color: var(--black); border-color: var(--gold); }
   .filter-btn:hover::before { transform: translateX(0); }
-  .filter-btn.active {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--black);
-  }
-
-  .product-card.hidden {
-    display: none;
-  }
-  .product-card.fade-in {
-    animation: fadeUp 0.4s ease forwards;
-  }
+  .filter-btn.active { background: var(--gold); border-color: var(--gold); color: var(--black); }
+  .product-card.hidden { display: none; }
+  .product-card.fade-in { animation: fadeUp 0.4s ease forwards; }
 
   .catalog-grid {
     display: grid;
@@ -547,7 +505,6 @@
     max-width: 1200px;
     margin: 0 auto;
   }
-
   .product-card {
     background: var(--black-card);
     position: relative;
@@ -559,7 +516,6 @@
     transition: transform 0.4s ease;
   }
   .product-card:hover { transform: scale(1.02); z-index: 2; }
-
   .product-img {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
@@ -567,42 +523,16 @@
     font-size: 80px;
     transition: transform 0.5s ease;
   }
-  .product-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+  .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .product-card:hover .product-img { transform: scale(1.08); }
-
   .product-overlay {
     position: absolute; inset: 0;
     background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
   }
-  .product-info {
-    position: relative; z-index: 1;
-    padding: 24px;
-  }
-  .product-tag {
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 6px;
-  }
-  .product-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 300;
-    color: var(--white);
-    line-height: 1.2;
-  }
-  .product-price {
-    font-size: 13px;
-    color: var(--gold-light);
-    margin-top: 8px;
-    letter-spacing: 1px;
-  }
+  .product-info { position: relative; z-index: 1; padding: 24px; }
+  .product-tag { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .product-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--white); line-height: 1.2; }
+  .product-price { font-size: 13px; color: var(--gold-light); margin-top: 8px; letter-spacing: 1px; }
   .product-action {
     margin-top: 12px;
     display: flex; align-items: center; gap: 8px;
@@ -617,7 +547,6 @@
   .product-action::after { content: '→'; }
   .product-card:hover .product-action { opacity: 1; transform: translateY(0); }
 
-  /* FEATURES */
   .features {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -626,132 +555,39 @@
     max-width: 1100px;
     margin: 0 auto;
   }
-  .feature-item {
-    background: var(--black);
-    padding: 56px 40px;
-    text-align: center;
-    transition: background 0.3s;
-  }
+  .feature-item { background: var(--black); padding: 56px 40px; text-align: center; transition: background 0.3s; }
   .feature-item:hover { background: var(--black-card); }
-  .feature-icon {
-    font-size: 36px;
-    margin-bottom: 20px;
-    display: block;
-  }
-  .feature-title {
-    font-family: 'Cinzel', serif;
-    font-size: 13px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    margin-bottom: 12px;
-    text-transform: uppercase;
-  }
-  .feature-desc {
-    font-size: 13px;
-    color: var(--white-dim);
-    line-height: 1.7;
-  }
+  .feature-icon { font-size: 36px; margin-bottom: 20px; display: block; }
+  .feature-title { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 3px; color: var(--gold); margin-bottom: 12px; text-transform: uppercase; }
+  .feature-desc { font-size: 13px; color: var(--white-dim); line-height: 1.7; }
 
-  /* CONTACT */
-  .contact-section {
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .contact-bg {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at center, #1a1200 0%, #0a0a0a 70%);
-  }
+  .contact-section { text-align: center; position: relative; overflow: hidden; }
+  .contact-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at center, #1a1200 0%, #0a0a0a 70%); }
   .contact-content { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
-  .contact-content p {
-    color: var(--white-dim);
-    font-size: 15px;
-    line-height: 1.8;
-    margin: 24px 0 48px;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 20px;
-  }
-
-  .contact-methods {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
-    margin-bottom: 48px;
-  }
+  .contact-content p { color: var(--white-dim); line-height: 1.8; margin: 24px 0 48px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; }
+  .contact-methods { display: flex; flex-direction: column; gap: 16px; align-items: center; margin-bottom: 48px; }
   .contact-btn {
     display: inline-flex; align-items: center; gap: 16px;
-    padding: 18px 48px;
-    background: #25D366;
-    color: white;
-    text-decoration: none;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-family: 'Raleway', sans-serif;
-    transition: all 0.3s;
+    padding: 18px 48px; background: #25D366;
+    color: white; text-decoration: none;
+    font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    font-family: 'Raleway', sans-serif; transition: all 0.3s;
     width: 320px; justify-content: center;
   }
   .contact-btn:hover { background: #1da851; transform: translateY(-2px); }
   .contact-btn svg { width: 20px; height: 20px; fill: white; }
+  .contact-divider { display: flex; align-items: center; gap: 20px; color: var(--gold-dim); font-size: 11px; letter-spacing: 4px; margin: 16px 0; }
+  .contact-divider::before, .contact-divider::after { content: '◆'; font-size: 8px; }
+  .contact-phone { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--gold); letter-spacing: 4px; }
 
-  .contact-divider {
-    display: flex; align-items: center; gap: 20px;
-    color: var(--gold-dim);
-    font-size: 11px;
-    letter-spacing: 4px;
-    margin: 16px 0;
-  }
-  .contact-divider::before, .contact-divider::after {
-    content: '◆';
-    font-size: 8px;
-  }
+  footer { border-top: 1px solid rgba(201,168,76,0.2); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-brand { font-family: 'Cinzel', serif; font-size: 16px; letter-spacing: 4px; color: var(--gold); }
+  .footer-tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px; color: var(--white-dim); text-align: center; }
+  .footer-copy { font-size: 11px; color: var(--gold-dim); letter-spacing: 1px; }
 
-  .contact-phone {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    color: var(--gold);
-    letter-spacing: 4px;
-  }
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* FOOTER */
-  footer {
-    border-top: 1px solid rgba(201,168,76,0.2);
-    padding: 40px 48px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .footer-brand {
-    font-family: 'Cinzel', serif;
-    font-size: 16px;
-    letter-spacing: 4px;
-    color: var(--gold);
-  }
-  .footer-tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 13px;
-    color: var(--white-dim);
-    text-align: center;
-  }
-  .footer-copy {
-    font-size: 11px;
-    color: var(--gold-dim);
-    letter-spacing: 1px;
-  }
-
-  /* REVEAL ANIMATION */
-  .reveal {
-    opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* RESPONSIVE */
   @media (max-width: 768px) {
     nav { padding: 20px 24px; }
     .nav-links { display: none; }
@@ -772,7 +608,6 @@
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="nav-brand">Passato Eleganti</a>
   <ul class="nav-links">
@@ -782,7 +617,6 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <svg class="hero-rings" viewBox="0 0 600 600">
@@ -795,10 +629,7 @@
     <circle cx="300" cy="360" r="80" stroke-width="0.6"/>
     <circle cx="300" cy="240" r="80" stroke-width="0.6"/>
   </svg>
-
   <div class="hero-ornament">Calzado de Dama</div>
-
-  <!-- Logo SVG recreado -->
   <div class="hero-logo-symbol">
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -820,23 +651,19 @@
         <circle cx="130" cy="130" r="35"/>
         <circle cx="100" cy="100" r="55"/>
       </g>
-      <!-- Shoe silhouette -->
       <path d="M72 108 Q85 98 100 100 Q115 102 122 106 Q118 114 100 116 Q82 116 72 108Z" fill="url(#goldGrad)" opacity="0.9"/>
     </svg>
   </div>
-
   <h1>PASSATO<span>Eleganti</span></h1>
   <p class="hero-tagline">Donde el cuero se convierte en comodidad, y cada paso es puro placer</p>
   <div class="hero-cta">
     <a href="#coleccion" class="btn-gold">Ver Colección</a>
   </div>
-
   <div class="scroll-indicator">
     <div class="scroll-line"></div>
   </div>
 </section>
 
-<!-- NOSOTROS -->
 <section id="nosotros" style="padding: 100px 48px;">
   <div class="about reveal">
     <div class="about-text">
@@ -856,7 +683,6 @@
   </div>
 </section>
 
-<!-- FEATURES -->
 <div style="padding: 0 48px 80px; max-width: 1100px; margin: 0 auto;" class="reveal">
   <div class="features">
     <div class="feature-item">
@@ -877,7 +703,24 @@
   </div>
 </div>
 
-<!-- CATÁLOGO -->
+<!-- ============================================================
+     CATÁLOGO
+     ============================================================
+     INSTRUCCIONES PARA AGREGAR IMÁGENES:
+     
+     Cada producto tiene DOS partes que debes editar:
+     
+     1) data-images='["FOTO_PRINCIPAL","FOTO_ANGULO_2","FOTO_ANGULO_3"]'
+        → Pon aquí los 3 links de fotos del mismo zapato
+     
+     2) <img src="FOTO_PRINCIPAL" ...>
+        → Pon aquí el mismo link que el primero de data-images
+     
+     Puedes tener MÁS o MENOS de 3 fotos, por ejemplo:
+       data-images='["foto1","foto2"]'          → 2 fotos
+       data-images='["foto1","foto2","foto3","foto4"]'  → 4 fotos
+     ============================================================ -->
+
 <section id="coleccion" class="catalog-section">
   <div class="catalog-header reveal">
     <div class="section-label" style="justify-content: center;">Colección</div>
@@ -885,87 +728,254 @@
     <p>Explora nuestra selección de calzado. Si algo te enamora, contáctanos y coordinamos tu pedido.</p>
   </div>
 
-  <!-- FILTROS -->
   <div class="catalog-filters reveal">
     <button class="filter-btn active" data-filter="todos">✦ Todos</button>
-    <button class="filter-btn" data-filter="tacon">Tacones</button>
-    <button class="filter-btn" data-filter="stiletto">Stilettos</button>
-    <button class="filter-btn" data-filter="flat">Flats</button>
-    <button class="filter-btn" data-filter="bota">Botas</button>
+    <button class="filter-btn" data-filter="Oxford">Oxford</button>
+    <button class="filter-btn" data-filter="Mocasíns">Mocasíns</button>
+    <button class="filter-btn" data-filter="botines">Botines</button>
     <button class="filter-btn" data-filter="sandalia">Sandalias</button>
   </div>
 
   <div class="catalog-grid reveal">
-    <div class="product-card" data-type="stiletto"
-      data-name="Stiletto Clásico"
+
+    <!-- ══════════════════════════════════════════
+         PRODUCTO 1 – STILETTO CLÁSICO
+         ══════════════════════════════════════════ -->
+    <div class="product-card" data-type="Mocasíns"
+      data-name="Mocasín Elegente"
       data-tag="Nueva Llegada"
-      data-desc="Líneas puras y una silueta atemporal. Este stiletto eleva cualquier look con su corte preciso y tacón en aguja que alarga la figura con gracia natural."
-      data-images='["AQUI-VA-EL-LINK-DE-TU-IMAGEN","AQUI-VA-EL-LINK-ANGULO-2","AQUI-VA-EL-LINK-ANGULO-3"]'>
-      <div class="product-img"><img src="AQUI-VA-EL-LINK-DE-TU-IMAGEN" alt="Stiletto Clásico"></div>
+      data-desc="Mocasín Elegante
+Cuero negro · Cuña baja · Hebilla platiada
+Comodidad y estilo para cada día."
+      data-images='[
+        "https://i.postimg.cc/j2sJPxjf/modelo1.png",
+        "https://i.postimg.cc/dVzknm06/IMG-20260507-141527-removebg-preview.png",
+        "https://i.postimg.cc/GmZ8zJpX/IMG-20260507-141532-removebg-preview.png",
+        "https://i.postimg.cc/Sxw2V7KD/IMG-20260507-141542-removebg-preview.png"
+      ]'>
+      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
+      <div class="product-img"><img src="https://i.postimg.cc/j2sJPxjf/modelo1.png" alt="Mocasín Clásico"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Nueva Llegada</div>
-        <div class="product-name">Stiletto Clásico</div>
+        <div class="product-name">Mocasín Elegante</div>
         <div class="product-price">Consultar precio</div>
         <div class="product-action">Ver detalle</div>
       </div>
     </div>
-    <div class="product-card" data-type="tacon"
-      data-name="Tacón Dorado"
-      data-tag="Favorito"
-      data-desc="El favorito de nuestra clientela. Un tacón robusto con acabado dorado que combina sofisticación y estabilidad para lucir perfecta todo el día."
-      data-images='["AQUI-VA-EL-LINK-DE-TU-IMAGEN","AQUI-VA-EL-LINK-ANGULO-2","AQUI-VA-EL-LINK-ANGULO-3"]'>
-      <div class="product-img"><img src="AQUI-VA-EL-LINK-DE-TU-IMAGEN" alt="Tacón Dorado"></div>
+    
+        <div class="product-card" data-type="Mocasíns"
+      data-name="Mocasín Flor"
+      data-tag="Nueva Llegada"
+      data-desc="Mocasín Flor
+Cuero miel · Cuña baja · picado en flor
+Comodidad y estilo para cada día."
+      data-images='[
+        "https://i.postimg.cc/4dw0R1mf/Gemini-Generated-Image-4xkd4s4xkd4s4xkd.png",
+        "https://i.postimg.cc/yxdb1SZD/IMG-20260507-141011-removebg-preview.png",
+        "https://i.postimg.cc/hvj5D7dJ/IMG-20260507-141006-removebg-preview.png",
+        "https://i.postimg.cc/1XtjmNqn/IMG-20260507-141002-removebg-preview.png"
+      ]'>
+      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
+      <div class="product-img"><img src="https://i.postimg.cc/4dw0R1mf/Gemini-Generated-Image-4xkd4s4xkd4s4xkd.png" alt="Mocasín Clásico"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
-        <div class="product-tag">Favorito</div>
-        <div class="product-name">Tacón Dorado</div>
+        <div class="product-tag">Nueva Llegada</div>
+        <div class="product-name">Mocasín Flor</div>
         <div class="product-price">Consultar precio</div>
         <div class="product-action">Ver detalle</div>
       </div>
     </div>
-    <div class="product-card" data-type="flat"
-      data-name="Flat Elegante"
-      data-tag="Comodidad"
-      data-desc="Elegancia sin sacrificar el confort. Este flat de cuero suave abraza el pie con delicadeza y acompaña desde la mañana hasta la noche sin esfuerzo."
-      data-images='["AQUI-VA-EL-LINK-DE-TU-IMAGEN","AQUI-VA-EL-LINK-ANGULO-2","AQUI-VA-EL-LINK-ANGULO-3"]'>
-      <div class="product-img"><img src="AQUI-VA-EL-LINK-DE-TU-IMAGEN" alt="Flat Elegante"></div>
+
+            <div class="product-card" data-type="Mocasíns"
+      data-name="Mocasín Clásico"
+      data-tag="Nueva Llegada"
+      data-desc="Mocasín Clásico
+Cuero negro · Cuña baja · adorno de laso
+Comodidad y estilo para cada día."
+      data-images='[
+        "https://i.postimg.cc/xdZRvFJH/Gemini-Generated-Image-i7pvxdi7pvxdi7pv.png",
+        "https://i.postimg.cc/yNGPmrgJ/IMG-20260507-143031-removebg-preview.png",
+        "https://i.postimg.cc/mrnwY6z1/IMG-20260507-143036-removebg-preview.png",
+        "https://i.postimg.cc/25twQXbb/IMG-20260507-143042-removebg-preview.png"
+      ]'>
+      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
+      <div class="product-img"><img src="https://i.postimg.cc/xdZRvFJH/Gemini-Generated-Image-i7pvxdi7pvxdi7pv.png" alt="Mocasín Clásico"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
-        <div class="product-tag">Comodidad</div>
-        <div class="product-name">Flat Elegante</div>
+        <div class="product-tag">Nueva Llegada</div>
+        <div class="product-name">Mocasín Clásico</div>
         <div class="product-price">Consultar precio</div>
         <div class="product-action">Ver detalle</div>
       </div>
     </div>
-    <div class="product-card" data-type="bota"
-      data-name="Bota Fina"
+
+                <div class="product-card" data-type="Mocasíns"
+      data-name="Mocasín Clásico"
+      data-tag="Nueva Llegada"
+      data-desc="Mocasín Clásico
+Cuero Conchevino · Cuña baja · adorno de laso
+Comodidad y estilo para cada día."
+      data-images='[
+        "https://i.postimg.cc/d0G16hDX/Gemini-Generated-Image-ifp3dhifp3dhifp3.png",
+        "https://i.postimg.cc/NMY0zQrP/IMG-20260507-142706-removebg-preview.png",
+        "https://i.postimg.cc/Dz1Z6SmN/IMG-20260507-142710-removebg-preview.png",
+        "https://i.postimg.cc/YSQ9Rvjy/IMG-20260507-142729-removebg-preview.png"
+      ]'>
+      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
+      <div class="product-img"><img src="https://i.postimg.cc/d0G16hDX/Gemini-Generated-Image-ifp3dhifp3dhifp3.png" alt="Mocasín Clásico"></div>
+      <div class="product-overlay"></div>
+      <div class="product-info">
+        <div class="product-tag">Nueva Llegada</div>
+        <div class="product-name">Mocasín Clásico</div>
+        <div class="product-price">Consultar precio</div>
+        <div class="product-action">Ver detalle</div>
+      </div>
+    </div>
+
+                    <div class="product-card" data-type="Mocasíns"
+      data-name="Mocasín Formal"
+      data-tag="Nueva Llegada"
+      data-desc="Mocasín Formal
+
+Cuero negro · Cuña baja · Casual
+Comodidad y estilo para cada día."
+      data-images='[
+        "https://i.postimg.cc/7PzkTFG9/Gemini-Generated-Image-cybydpcybydpcyby.png",
+        "https://i.postimg.cc/J7XLBfDN/IMG-20260507-143238-removebg-preview.png",
+        "https://i.postimg.cc/NGXcr391/IMG-20260507-143242-removebg-preview.png",
+        "https://i.postimg.cc/y6RHSMg0/IMG-20260507-143246-removebg-preview.png"
+      ]'>
+      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
+      <div class="product-img"><img src="https://i.postimg.cc/7PzkTFG9/Gemini-Generated-Image-cybydpcybydpcyby.png" alt="Mocasín Formal
+        "></div>
+      <div class="product-overlay"></div>
+      <div class="product-info">
+        <div class="product-tag">Nueva Llegada</div>
+        <div class="product-name">Mocasín Formal
+
+        </div>
+        <div class="product-price">Consultar precio</div>
+        <div class="product-action">Ver detalle</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         PRODUCTO 2 – TACÓN DORADO
+         ══════════════════════════════════════════ -->
+    <div class="product-card" data-type="Oxford"
+      data-name="Oxford Cafe"
+      data-tag="Oxford"
+      data-desc="El Oxford Un calzado de cuero cafe con acabado elastico que combina sofisticación y estabilidad para lucir perfecta todo el día."
+      data-images='[
+        "https://i.postimg.cc/0ysDs1D1/Gemini-Generated-Image-dyulo3dyulo3dyul.png",
+        "https://i.postimg.cc/YCHYHBgZ/IMG-20260507-143511-removebg-preview.png",
+        "https://i.postimg.cc/cLSwSGYj/IMG-20260507-143516-removebg-preview.png",
+        "https://i.postimg.cc/rwkxk2W7/IMG-20260507-143520-removebg-preview.png"
+      ]'>
+      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
+      <div class="product-img"><img src="https://i.postimg.cc/0ysDs1D1/Gemini-Generated-Image-dyulo3dyulo3dyul.png" alt="Tacón Dorado"></div>
+      <div class="product-overlay"></div>
+      <div cl
+      roduct-overlay"></div>
+      <div class="product-info">
+        <div class="product-tag">Nueva Llegada</div>
+        <div class="product-name">Oxford Cafe</div>
+        <div class="product-price">Consultar precio</div>
+        <div class="product-action">Ver detalle</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         PRODUCTO 4 – BOTA FINA
+         ══════════════════════════════════════════ -->
+    <div class="product-card" data-type="botines"
+      data-name="PROXIMAMENTE "
       data-tag="Temporada"
       data-desc="Diseñada para la mujer que impone presencia. Caña alta y punta fina que define el paso con autoridad y distinción en cada temporada."
-      data-images='["AQUI-VA-EL-LINK-DE-TU-IMAGEN","AQUI-VA-EL-LINK-ANGULO-2","AQUI-VA-EL-LINK-ANGULO-3"]'>
-      <div class="product-img"><img src="AQUI-VA-EL-LINK-DE-TU-IMAGEN" alt="Bota Fina"></div>
+      data-images='[
+        "https://TU-LINK-BOTA-FOTO-1-AQUI",
+        "https://TU-LINK-BOTA-FOTO-2-AQUI",
+        "https://TU-LINK-BOTA-FOTO-3-AQUI"
+      ]'>
+      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
+      <div class="product-img"><img src="https://TU-LINK-BOTA-FOTO-1-AQUI" alt="Botines"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
-        <div class="product-tag">Temporada</div>
-        <div class="product-name">Bota Fina</div>
+        <div class="product-tag">PROXIMAMENTE</div>
+        <div class="product-name">Botines</div>
         <div class="product-price">Consultar precio</div>
         <div class="product-action">Ver detalle</div>
       </div>
     </div>
+
+    <!-- ══════════════════════════════════════════
+         PRODUCTO 5 – SANDALIA PREMIUM
+         ══════════════════════════════════════════ -->
     <div class="product-card" data-type="sandalia"
-      data-name="Sandalia Premium"
+      data-name="Sandalia"
       data-tag="Edición Especial"
-      data-desc="Una sandalia de edición limitada con detalles artesanales únicos. Su diseño abierto y acabados premium la convierten en la pieza estrella de cualquier ocasión especial."
-      data-images='["AQUI-VA-EL-LINK-DE-TU-IMAGEN","AQUI-VA-EL-LINK-ANGULO-2","AQUI-VA-EL-LINK-ANGULO-3"]'>
-      <div class="product-img"><img src="AQUI-VA-EL-LINK-DE-TU-IMAGEN" alt="Sandalia Premium"></div>
+      data-desc="Una sandalia de edición limitada de cuero negro con detalles artesanales únicos. Su diseño abierto y acabados premium la convierten en la pieza estrella de cualquier ocasión especial."
+      data-images='[
+        "https://i.postimg.cc/Zq6QqSDp/zandalia-A1.png",
+        "https://i.postimg.cc/HLbNLgPJ/zandalia2.png",
+        "https://i.postimg.cc/0N74NsHr/zandalia3.png",
+        "https://i.postimg.cc/g0370WBn/zandalia4.png"
+      ]'>
+      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
+      <div class="product-img"><img src="https://i.postimg.cc/Zq6QqSDp/zandalia-A1.png" alt="Sandalia Premium"></div>
       <div class="product-overlay"></div>
       <div class="product-info">
         <div class="product-tag">Edición Especial</div>
-        <div class="product-name">Sandalia Premium</div>
+        <div class="product-name">Sandalia</div>
         <div class="product-price">Consultar precio</div>
         <div class="product-action">Ver detalle</div>
       </div>
     </div>
+
+    <div class="product-card" data-type="sandalia"
+      data-name="Sandalia"
+      data-tag="Edición Especial"
+      data-desc="Una sandalia de edición limitada de curero cafe  con detalles artesanales únicos. Su diseño abierto y acabados premium la convierten en la pieza estrella de cualquier ocasión especial."
+      data-images='[
+        "https://i.postimg.cc/sfb051dZ/Gemini-Generated-Image-gc1xigc1xigc1xig.png",
+        "https://i.postimg.cc/3rzb2W5y/IMG-20260507-142448-removebg-preview.png",
+        "https://i.postimg.cc/59Dk8jdX/IMG-20260507-142453-removebg-preview.png",
+        "https://i.postimg.cc/59Dk8jd6/IMG-20260507-142457-removebg-preview.png"
+      ]'>
+      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
+      <div class="product-img"><img src="https://i.postimg.cc/sfb051dZ/Gemini-Generated-Image-gc1xigc1xigc1xig.png" alt="Sandalia Premium"></div>
+      <div class="product-overlay"></div>
+      <div class="product-info">
+        <div class="product-tag">Edición Especial</div>
+        <div class="product-name">Sandalia</div>
+        <div class="product-price">Consultar precio</div>
+        <div class="product-action">Ver detalle</div>
+      </div>
+    </div>
+
+        <div class="product-card" data-type="sandalia"
+      data-name="Sandalia"
+      data-tag="Edición Especial"
+      data-desc="Una sandalia de edición limitada de cuero Conchevino detalles artesanales únicos. Su diseño abierto y acabados premium la convierten en la pieza estrella de cualquier ocasión especial."
+      data-images='[
+        "https://i.postimg.cc/dVsRCK1v/Gemini-Generated-Image-pkzqh8pkzqh8pkzq.png",
+        "https://i.postimg.cc/L6BBhsHX/IMG-20260507-194450-removebg-preview.png",
+        "https://i.postimg.cc/L6BBhsHX/IMG-20260507-194450-removebg-preview.png",
+        "https://i.postimg.cc/15cc4z9z/IMG-20260507-194459-removebg-preview.png"
+      ]'>
+      <!-- 👇 Este src debe ser el mismo que la Foto 1 de arriba -->
+      <div class="product-img"><img src="https://i.postimg.cc/dVsRCK1v/Gemini-Generated-Image-pkzqh8pkzqh8pkzq.png" alt="Sandalia Premium"></div>
+      <div class="product-overlay"></div>
+      <div class="product-info">
+        <div class="product-tag">Edición Especial</div>
+        <div class="product-name">Sandalia</div>
+        <div class="product-price">Consultar precio</div>
+        <div class="product-action">Ver detalle</div>
+      </div>
+    </div>
+
+    <!-- Tarjeta CTA final -->
     <div class="product-card" style="background: var(--black-card); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px;">
       <div style="font-size: 32px; color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 4px; text-align: center; padding: 40px; position: relative; z-index: 1;">
         <div style="font-size: 48px; margin-bottom: 16px;">◆</div>
@@ -973,33 +983,29 @@
         <div style="font-size: 13px; color: var(--white-dim); font-family: 'Cormorant Garamond', serif; font-style: italic; margin-top: 12px; letter-spacing: 2px;">Escríbenos y coordinamos</div>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contacto" class="contact-section">
   <div class="contact-bg"></div>
   <div class="contact-content reveal">
     <div class="section-label" style="justify-content: center;">Contáctanos</div>
     <h2 class="section-title">¿Lista para tu <em>próximo par?</em></h2>
     <p>Escríbenos por WhatsApp, cuéntanos qué te gustó y nosotros coordinamos todo por ti.</p>
-
     <div class="contact-methods">
-      <a href="https://wa.me/593979600478?text=Hola%2C%20me%20interesan%20sus%20zapatos%20de%20Passato%20Eleganti" 
-         class="contact-btn" target="_blank">
+      <a href="https://wa.me/593979600478?text=Hola%2C%20me%20interesan%20sus%20zapatos%20de%20Passato%20Eleganti" class="contact-btn" target="_blank">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
         Escribir por WhatsApp
       </a>
-
       <div class="contact-divider">o llámanos al</div>
       <div class="contact-phone">0979 600 478</div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-brand">Passato Eleganti</div>
   <div class="footer-tagline">Donde el cuero se convierte en comodidad</div>
@@ -1010,8 +1016,6 @@
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal" id="modal">
     <button class="modal-close" id="modalClose">✕</button>
-
-    <!-- Galería izquierda -->
     <div class="modal-gallery">
       <button class="modal-arrow prev" id="modalPrev">‹</button>
       <img class="modal-main-img" id="modalMainImg" src="" alt="">
@@ -1019,8 +1023,6 @@
       <div class="modal-counter" id="modalCounter">1 / 3</div>
       <div class="modal-thumbs" id="modalThumbs"></div>
     </div>
-
-    <!-- Info derecha -->
     <div class="modal-info">
       <div>
         <div class="modal-tag" id="modalTag"></div>
@@ -1037,7 +1039,6 @@
 </div>
 
 <script>
-  // ── MODAL ──────────────────────────────────────────
   const overlay    = document.getElementById('modalOverlay');
   const modalClose = document.getElementById('modalClose');
   const mainImg    = document.getElementById('modalMainImg');
@@ -1072,8 +1073,6 @@
     modalDesc.textContent = card.dataset.desc;
     const msg = encodeURIComponent(`Hola, me interesa el modelo *${card.dataset.name}* de Passato Eleganti`);
     modalWa.href = `https://wa.me/593979600478?text=${msg}`;
-
-    // Miniaturas
     thumbsEl.innerHTML = '';
     images.forEach((src, i) => {
       const t = document.createElement('img');
@@ -1082,7 +1081,6 @@
       t.addEventListener('click', () => showImage(i));
       thumbsEl.appendChild(t);
     });
-
     showImage(0);
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -1093,7 +1091,6 @@
     document.body.style.overflow = '';
   }
 
-  // Abrir al pulsar una tarjeta
   document.querySelectorAll('.product-card[data-images]').forEach(card => {
     card.addEventListener('click', () => openModal(card));
   });
@@ -1103,7 +1100,6 @@
   prevBtn.addEventListener('click', e => { e.stopPropagation(); showImage(currentIdx - 1); });
   nextBtn.addEventListener('click', e => { e.stopPropagation(); showImage(currentIdx + 1); });
 
-  // Teclado
   document.addEventListener('keydown', e => {
     if (!overlay.classList.contains('open')) return;
     if (e.key === 'Escape') closeModal();
@@ -1111,7 +1107,6 @@
     if (e.key === 'ArrowRight') showImage(currentIdx + 1);
   });
 
-  // ── FILTER BUTTONS ─────────────────────────────────
   const filterBtns = document.querySelectorAll('.filter-btn');
   const productCards = document.querySelectorAll('.product-card[data-type]');
 
@@ -1119,9 +1114,7 @@
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
       const filter = btn.dataset.filter;
-
       productCards.forEach(card => {
         if (filter === 'todos' || card.dataset.type === filter) {
           card.classList.remove('hidden');
@@ -1134,7 +1127,6 @@
     });
   });
 
-  // Custom cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   document.addEventListener('mousemove', e => {
@@ -1142,7 +1134,6 @@
     ring.style.transform = `translate(${e.clientX - 18}px, ${e.clientY - 18}px)`;
   });
 
-  // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
